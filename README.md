@@ -88,6 +88,16 @@ Comprende un blog orientado a noticias y artículos
 │ │ │ │ ├── post_new.html
 │ │ │ │ ├── post_update.html
 │ │ │ │ └── ...
+│ │ ├── db.sqlite3			    <--- Base de datos - **Ignorada en el .gitignore**
+│ │ ├── manage.py
+│ │ └── ...
+│ ├── entorno/						<--- Carpeta del entorno - **Ignorada en el .gitignore** 
+│ │ ├── Scripts/
+│ │ │ ├── activate.bat
+│ │ │ ├── deactivate.bat
+│ │ │ └── ...
+│ │ └── ...
+│ ├── .gitignore
 │ │ │ ├── user/
 │ │ │ │ ├── user_profile.html
 │ │ │ │ ├── user_update.html
