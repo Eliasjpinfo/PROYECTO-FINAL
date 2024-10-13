@@ -1,5 +1,5 @@
 from django import forms
-from apps.post.models import Post, PostImage
+from apps.post.models import Post, PostImage, Comment
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -48,3 +48,31 @@ class UpdatePostForm(PostForm):
                     if not self.cleaned_data.get(f"keep_image_{image.id}", True):
                         image.delete() # Eliminar la imagen si el usuario no la quiere mantener, checkboxes desmarcados
         return post
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+
+        labels = {
+            'content': 'Comentario'
+        }
+
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Escribe tu comentario...', 'class': 'p-2'})
+        }
+
+class PostFilterForm(forms.Form):
+    search_query = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Buscar...', 'class': 'w-full p-2'})
+    )
+    order_by = forms.ChoiceField(
+        required=False,
+        choices=(
+            ('-creation_date', 'Más reciente'),
+            ('creation_date', 'Más antiguo'),
+            ('-comments_count', 'Más comentado'),
+        ),
+        widget=forms.Select(attrs={'class': 'w-full p-2'})
+    )
