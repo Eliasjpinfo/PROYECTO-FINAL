@@ -1,4 +1,3 @@
-# blog/apps/post/views.py
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView, UpdateView
 from apps.post.models import Post, PostImage, Comment
 from apps.post.forms import NewPostForm, UpdatePostForm, CommentForm, PostFilterForm
@@ -8,7 +7,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count
 
-# TODO: Cambiar TemplateView por DetailView para que se pueda ver el detalle de un post
 
 class PostDetailView(TemplateView):
     template_name = 'post/post_detail.html'
@@ -52,23 +50,23 @@ class PostListView(ListView):
             page_obj = context['page_obj']
             paginator = context['paginator']
 
-        # Usamos number para obtener el número de la página actual
-        if page_obj.number > 1:
-            pagination['first_page'] = f'?{query_params.urlencode()}&page= {paginator.page_range[0]}'
+            # Usamos number para obtener el número de la página actual
+            if page_obj.number > 1:
+                pagination['first_page'] = f'?{query_params.urlencode()}&page= {paginator.page_range[0]}'
 
-        # Usamos has_previous para saber si hay una página anterior
-        if page_obj.has_previous():
-            pagination['previous_page'] = f'?{query_params.urlencode()}&page= {page_obj.number - 1}'
+            # Usamos has_previous para saber si hay una página anterior
+            if page_obj.has_previous():
+                pagination['previous_page'] = f'?{query_params.urlencode()}&page= {page_obj.number - 1}'
 
-        # Usamos has_next para saber si hay una página siguiente
-        if page_obj.has_next():
-            pagination['next_page'] = f'?{query_params.urlencode()}&page= {page_obj.number + 1}'
+            # Usamos has_next para saber si hay una página siguiente
+            if page_obj.has_next():
+                pagination['next_page'] = f'?{query_params.urlencode()}&page= {page_obj.number + 1}'
 
-        # Usamos num_pages para obtener el número total de páginas
-        if page_obj.number < paginator.num_pages:
-            pagination['last_page'] = f'?{query_params.urlencode()}&page= {paginator.num_pages}'
+            # Usamos num_pages para obtener el número total de páginas
+            if page_obj.number < paginator.num_pages:
+                pagination['last_page'] = f'?{query_params.urlencode()}&page= {paginator.num_pages}'
         
-        context['pagination'] = pagination
+            context['pagination'] = pagination
 
         return context        
 
@@ -113,34 +111,34 @@ class PostDetailView(DetailView):
         if edit_comment_id:
             comment = get_object_or_404(Comment, id=edit_comment_id)
 
-        # Permitimos editar solo si el usuario logueado es el autor del comentario
-        if comment.author == self.request.user:
-            context['editing_comment_id'] = comment.id
-            context['edit_comment_form'] = CommentForm(instance=comment)
-        else:
-            context['editing_comment_id'] = None
-            context['edit_comment_form'] = None
+            # Permitimos editar solo si el usuario logueado es el autor del comentario
+            if comment.author == self.request.user:
+                context['editing_comment_id'] = comment.id
+                context['edit_comment_form'] = CommentForm(instance=comment)
+            else:
+                context['editing_comment_id'] = None
+                context['edit_comment_form'] = None
 
         # Eliminar comentario
         delete_comment_id = self.request.GET.get('delete_comment')
         if delete_comment_id:
             comment = get_object_or_404(Comment, id=delete_comment_id)
 
-        # Permitimos solo si el usuario logueado tiene permiso para eliminar el comentario
+            # Permitimos solo si el usuario logueado tiene permiso para eliminar el comentario
 
-        if (
-            # Es autor del comentario
-            comment.author == self.request.user or
+            if (
+                # Es autor del comentario
+                comment.author == self.request.user or
 
-        # Es autor del post, pero el comentario no es de un admin o un superuser
-            (comment.post.author == self.request.user and not comment.author.is_admin and not comment.author.is_superuser) or
-            self.request.user.is_superuser or # Es Superuser
-            self.request.user.groups.filter(
-                name='Admins').exists() # Es Admin
-        ):
-            context['deleting_comment_id'] = comment.id
-        else:
-            context['deleting_comment_id'] = None
+            # Es autor del post, pero el comentario no es de un admin o un superuser
+                (comment.post.author == self.request.user and not comment.author.is_admin and not comment.author.is_superuser) or
+                self.request.user.is_superuser or # Es Superuser
+                self.request.user.groups.filter(
+                    name='Admins').exists() # Es Admin
+            ):
+                context['deleting_comment_id'] = comment.id
+            else:
+                context['deleting_comment_id'] = None
 
         return context
     
