@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 from django.urls import reverse_lazy
 
 class UserProfileView(TemplateView):
-    template_name = 'user/user_profile.html'
+    template_name = 'users/user_profile.html'
 
 class RegisterView(CreateView):
     template_name = 'auth/auth_register.html'
