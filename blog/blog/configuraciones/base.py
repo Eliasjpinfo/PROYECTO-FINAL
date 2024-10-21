@@ -24,6 +24,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 AUTH_USER_MODEL = 'user.User'
 
+DEFAULT_POST_IMAGE = 'post/default/post_default.png'
+
 
 # Application definition
 
@@ -34,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'ckeditor',
+    'ckeditor_uploader',
+    'blog',
     'apps.post',
     'apps.user', 
 ]
@@ -52,6 +56,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'blog.urls'
 
 AUTH_USER_MODELS = 'user_user'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/ckeditor/'
 
 TEMPLATES = [
     {

@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 from django.urls import reverse_lazy
 
 class UserProfileView(TemplateView):
-    template_name = 'user/user_profile.html'
+    template_name = 'users/user_profile.html'
 
 class RegisterView(CreateView):
     template_name = 'auth/auth_register.html'
@@ -30,10 +30,16 @@ class LoginView(LoginViewDjango):
     authentication_form = LoginForm
 
     def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
         return reverse_lazy('home')
     
 class LogoutView(LogoutViewDjango):
     def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
         return reverse_lazy('home')
     
 

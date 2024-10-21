@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1>Blog</h1>
-    </body>
-</html>
-
 {% extends 'layouts/general_layout.html' %}
+{% load static %}
+
+{% block title %} Inicio | BLOG IA {% endblock title %}
 
 {% block content %}
-    <h1>Blog Informatorio 🚀</h1>
+    <div style= "display: flex; justify-content: center; "> <img src: ;  alt="" style="max-width: 100; height: auto; align-items: center;"> </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h4 style="white-space: pre-wrap; font-family: Italiana; font-size: 30px; color: black; text-align: center;">RECETAS DESCATADAS</h4>
+        <h4 style="white-space: pre-wrap; font-family: Italiana; font-size: 30px; color: black; text-align: center;">VER TODAS LAS RECETAS</h4>
+    </div>
+
+    <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+        <div style="background-color: greenyellow; padding: 20px; border-radius: 10px; width: 30%; height: 150px;">
+            <h5 style="font-family: Italiana; font-size: 20px;">POST</h5>
+            <p>DESCRIPCION DEL POST</p>
+        </div>
+        <div style="background-color: greenyellow; padding: 20px; border-radius: 10px; width: 30%; height: 150px;">
+            <h5 style="font-family: Italiana; font-size: 20px;">POST</h5>
+            <p>DESCRIPCION DEL POST</p>
+        </div>
+    </div>
 {% endblock content %}
 

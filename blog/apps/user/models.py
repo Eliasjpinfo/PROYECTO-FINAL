@@ -5,7 +5,6 @@ from django.db import models
 import os
 import uuid
 
-...
 def get_avatar_filename(instance, filename):
     base_filename, file_extension = os.path.splittext(filename)
     new_filename = f"user_{instance.id}_avatar{file_extension}"
@@ -18,4 +17,14 @@ class User(AbstractUser):
     avatar = models.ImageField(
         upload_to=get_avatar_filename, default='user/default/avatar_default.jpg')
 
-
+    @property
+    def is_collaborator(self):
+        return self.groups.filter(name='Collaborators').exists()
+    
+    @property
+    def is_admin(self):
+        return self.groups.filter(name='Admins').exists()
+    
+    @property
+    def is_registered(self):
+        return self.groups.filter(name='Registered').exists()
