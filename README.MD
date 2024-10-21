@@ -2,7 +2,9 @@
 
 ## Descripción
 
-Comprende un blog orientado a noticias y artículos
+Comprende un blog de recetas de cocina
+
+Realizado por Jose Elias Pintos; Fernandez Santiago y Gomez, Sergio José.
 
 ## Estructura del proyecto
 
