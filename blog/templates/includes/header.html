@@ -4,11 +4,11 @@
     </div>
     <nav>
         <ul class="navigation">
-            <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Inicio</a></li>
-            <li><a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">Acerca de</a></li>
-            <li><a href="{% url 'posts' %}" class="{% if request.path == '/posts/' %}active{% endif %}">Posts</a></li>
-            <li><a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contacto</a></li>
-            <li><a href="{% url 'login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Iniciar Sesión</a></li>
+            <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}" aria-label="Ir a la página de inicio">Inicio</a></li>
+            <li><a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}" aria-label="Ir a la página acerca de">Acerca de</a></li>
+            <li><a href="{% url 'posts' %}" class="{% if request.path == '/posts/' %}active{% endif %}" aria-label="Ver los posts">Posts</a></li>
+            <li><a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}" aria-label="Ir a la página de contacto">Contacto</a></li>
+            <li><a href="{% url 'login' %}" class="{% if request.path == '/login/' %}active{% endif %}" aria-label="Iniciar sesión en el blog">Iniciar Sesión</a></li>
         </ul>
     </nav>
 </header>
