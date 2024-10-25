@@ -3,22 +3,34 @@
 {% block title %}Post | BLOG IA{% endblock title %}
 
 {% block content %}
+<div class="container mx-auto p-6 bg-gray-50 rounded-lg shadow-md">
+    <h2 class="text-3xl font-bold mb-6">Crear nuevo post</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label class="block text-sm font-semibold mb-2" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+            <input type="text" name="title" id="{{ form.title.id_for_label }}" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500" value="{{ form.title.value|default_if_none:'' }}">
+        </div>
+        
+        <div class="mb-4">
+            <label class="block text-sm font-semibold mb-2" for="id_content">Contenido:</label>
+            <textarea name="content" id="id_content" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
+        
+        <div class="mb-4">
+            <label class="inline-flex items-center">
+                {{ form.allow_comments }} <span class="ml-2 text-sm font-semibold">Permitir comentarios</span>
+            </label>
+        </div>
+        
+        <div class="mb-4">
+            <label class="block text-sm font-semibold mb-2">Imágenes:</label>
+            <input type="file" name="images" multiple class="w-full p-2 border border-gray-300 rounded-lg">
+        </div>
 
-<h2>Crear nuevo post</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="post-2">
-        <p class="post-3">{{ form.title.label_tag }} {{ form.title }}</p>
-        <p class="post-3">
-            <label for="id_content">Contenido:</label> {{ form.content }}
-        </p>
-        <p class="post-3">{{ form.allow_comments.label_tag }} {{ form.allow_comments }}</p>
-        <p class="post-3"><input type="file" name="images" multiple /></p>
-    </div>
-
-    <button type="submit" class="bg-blue-500 text-white p-2 rounded-lg">
-        Crear Post
-    </button>
-</form>
-
+        <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+            Crear Post
+        </button>
+    </form>
+</div>
 {% endblock content %}

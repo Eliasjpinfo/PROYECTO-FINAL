@@ -37,9 +37,6 @@ def create_groups_and_permissions(sender, instance, created, **kwargs):
                 name='Registered')
             registered_group.permissions.add(
                 view_post_permission,
-                add_post_permission,
-                change_post_permission,
-                delete_post_permission,
                 view_comment_permission,
                 add_comment_permission,
                 change_comment_permission,

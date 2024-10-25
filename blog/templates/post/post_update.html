@@ -3,54 +3,53 @@
 {% block title %}ACTUALIZAR Post | BLOG IA{% endblock title %}
 
 {% block content %}
+<div class="container mx-auto p-6 bg-gray-50 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-4">Actualizar: {{ form.instance.title }}</h2>
 
-<h2>Actualizar: {{ form.instance.title }}</h2>
+    {% if user.is_authenticated %}
+        <form method="post" enctype="multipart/form-data" class="flex flex-col gap-6 w-full max-w-md">
+            {% csrf_token %}
+            
+            <div class="flex flex-col">
+                <label for="{{ form.title.id_for_label }}" class="font-semibold mb-1">{{ form.title.label }}</label>
+                <input type="text" name="title" id="{{ form.title.id_for_label }}" class="mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500" value="{{ form.title.value }}">
+            </div>
 
-{% if user.is_authenticated %}
-    <form method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-start w-[400px] gap-4">
-        {% csrf_token %}
-        
-        <div class="flex flex-col">{{ form.title.label_tag }} {{ form.title }}</div>
-        <div class="flex flex-col">{{ form.content.label_tag }} {{ form.content }}</div>
-        <div class="flex gap-4">{{ form.allow_comments.label_tag }} {{ form.allow_comments }}</div>
+            <div class="flex flex-col">
+                <label for="{{ form.content.id_for_label }}" class="font-semibold mb-1">{{ form.content.label }}</label>
+                <textarea name="content" id="{{ form.content.id_for_label }}" class="mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500">{{ form.content.value }}</textarea>
+            </div>
 
-        <h3>Imágenes cargadas</h3>
-        <div class="flex flex-col gap-4">
-            {% for active_img in form.active_images %}
-                <p>
-                    <a href="{{ active_img.image.url }}" target="_blank">
-                        <img
-                            class="inline-flex w-[200px] aspect-[16/9] object-cover"
-                            src="{{ active_img.image.url }}"
-                            alt="Portada {{ active_img.id }} del post"
-                        />
-                    </a>
-                    <input
-                        type="checkbox"
-                        name="keep_image_{{ active_img.id }}"
-                        id="keep_image_{{ active_img.id }}"
-                        checked
-                    />
-                    <label for="keep_image_{{ active_img.id }}">Activa</label>
-                </p>
-            {% endfor %}
-        </div>
+            <div class="flex items-center gap-2">
+                {{ form.allow_comments }} <label class="font-semibold">{{ form.allow_comments.label }}</label>
+            </div>
 
-        <h3>Cargar nuevas imágenes</h3>
-        <input type="file" name="images" multiple />
+            <h3 class="text-lg font-semibold mt-4">Imágenes cargadas</h3>
+            <div class="flex flex-col gap-4">
+                {% for active_img in form.active_images %}
+                    <div class="flex items-center gap-2">
+                        <a href="{{ active_img.image.url }}" target="_blank">
+                            <img class="w-[200px] aspect-[16/9] object-cover rounded-lg" src="{{ active_img.image.url }}" alt="Portada {{ active_img.id }} del post" />
+                        </a>
+                        <input type="checkbox" name="keep_image_{{ active_img.id }}" id="keep_image_{{ active_img.id }}" checked class="ml-2" />
+                        <label for="keep_image_{{ active_img.id }}" class="text-sm">Activa</label>
+                    </div>
+                {% endfor %}
+            </div>
 
-        <div class="flex gap-2">
-            <a href="{% url 'post:post_detail' slug=form.instance.slug %}" class="bg-red-500 text-white p-2 rounded-md">Cancelar</a>
-            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md">Guardar cambios</button>
-        </div>
-    </form>
+            <h3 class="text-lg font-semibold mt-4">Cargar nuevas imágenes</h3>
+            <input type="file" name="images" multiple class="mt-1 p-2 border border-gray-300 rounded-lg">
 
-{% else %}
-    <p>Debes estar logueado para editar un post. 
-        <a href="{% url 'user:auth_login' %}">Inicia sesión</a>
-    </p>
-    <a href="{% url 'post:post_detail' slug=object.slug %}">Cancelar</a>
-{% endif %}
-
-{% comment %} <a href="javascript:history.back()">Cancelar</a> {% endcomment %}
+            <div class="flex gap-4 mt-4">
+                <a href="{% url 'post:post_detail' slug=form.instance.slug %}" class="bg-gray-300 text-gray-800 p-2 rounded-md hover:bg-gray-400">Cancelar</a>
+                <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-200">Guardar cambios</button>
+            </div>
+        </form>
+    {% else %}
+        <p>Debes estar logueado para editar un post. 
+            <a href="{% url 'user:auth_login' %}" class="text-blue-600 hover:underline">Inicia sesión</a>
+        </p>
+        <a href="{% url 'post:post_detail' slug=form.instance.slug %}" class="text-blue-600 hover:underline">Cancelar</a>
+    {% endif %}
+</div>
 {% endblock content %}

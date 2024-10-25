@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
-from .models import Publicacion
+from .models import Publicacion, Post
 
 
 class PostDetailView(TemplateView):
@@ -262,3 +262,15 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return is_comment_author or is_post_author or is_admin
 
 
+class CommentedPostsListView(ListView):
+    model = Post
+    template_name = 'post_detail.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.objects.filter(comments__isnull=False).distinct()
+    
+class HomeView(ListView):
+    model = Post
+    template_name = 'home.html'
+    context_object_name = 'post'

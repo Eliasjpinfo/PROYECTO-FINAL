@@ -4,20 +4,29 @@
 {% block title %} Inicio | BLOG IA {% endblock title %}
 
 {% block content %}
-    <div style="display: flex; justify-content: center;">
-        <img src="{% static 'path/to/your/image.jpg' %}" alt="Descripción de la imagen" style="max-width: 100%; height: auto; align-items: center;">
+    <div class="flex justify-center">
+        <img src="{% static 'images/imagen1.jpg' %}" alt="" class="max-w-full h-auto">
     </div>
 
+
     <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h4 style="white-space: pre-wrap; font-family: Italiana; font-size: 30px; color: black; text-align: center;">RECETAS DESTACADAS</h4>
-        <h4 style="white-space: pre-wrap; font-family: Italiana; font-size: 30px; color: black; text-align: center;">VER TODAS LAS RECETAS</h4>
+        <h4 class="header">
+            <a href="{% url 'post:commented_post' %}" class="inline-block text-blue-500 font-bold text-lg py-2 px-4 rounded-lg bg-blue-100 hover:bg-blue-200 transition duration-300">
+                RECETAS DESTACADAS
+            </a>
+        </h4>
+                    
+        <h4 class="header">
+            <a href="{% url 'post:post_list' %}" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">VER TODAS LAS RECETAS</a>
+        </h4>
     </div>
 
     <div style="display: flex; justify-content: space-around; margin-top: 20px;">
         {% for post in posts %}
-        <div style="background-color: greenyellow; padding: 20px; border-radius: 10px; width: 30%; height: 150px;">
-            <h5 style="font-family: Italiana; font-size: 20px;">{{ post.title }}</h5>
-            <p>{{ post.description }}</p>
+        <div class="recipe-card">
+            <h5 class="title">{{ post.title }}</h5>
+            <p>{{ post.content|truncatewords:20 }}</p>
+            <a href="{% url 'post:post_detail' slug=post.slug %}" class="text-blue-500">Leer más</a>
         </div>
         {% endfor %}
     </div>

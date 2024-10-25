@@ -1,14 +1,12 @@
 from django.urls import path
 import apps.post.views as views
-from .views import home
-from .views import inicio
+from .views import CommentedPostsListView
+from .views import HomeView 
 
 
 app_name = 'post'
 
 urlpatterns = [
-    path('', inicio, name='inicio'),
-    path('', home, name='home'),
     path('posts/', views.PostListView.as_view(), name="post_list"),
     path('posts/create', views.PostCreateView.as_view(), name="post_create"),
     path('posts/<slug:slug>/', views.PostDetailView.as_view(), name='post_detail'),
@@ -17,5 +15,7 @@ urlpatterns = [
     path('posts/<slug:slug>/comments/create/', views.CommentCreateView.as_view(), name='comment_create'),
     path('comments/<uuid:pk>/update/', views.CommentUpdateView.as_view(), name='comment_update'),
     path('comments/<uuid:pk>/delete/', views.CommentDeleteView.as_view(), name='comment_delete'),
+    path('comennts/', CommentedPostsListView.as_view(), name='commented_post'),
+    path('post', HomeView.as_view(), name='home'),
 ]
     

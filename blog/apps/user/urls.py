@@ -3,6 +3,7 @@ from django.urls import path
 import apps.user.views as views
 from .views import AboutView, ContactView
 
+
 app_name = 'user'
 
 urlpatterns = [

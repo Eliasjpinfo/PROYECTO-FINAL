@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, ListView
 from django.contrib.auth.views import LoginView as LoginViewDjango, LogoutView as LogoutViewDjango
 from apps.user.forms import RegisterForm, LoginForm
 from django.contrib.auth.models import Group
