@@ -1,8 +1,17 @@
 .env
-__pycache__
+__pycache__/
 db.sqlite3
 .vscode
 migrations
 /blog/media/*
 entorno
 staticfiles
+
+# Ignorar archivos de configuración
+*.pyc
+__pycache__/
+*.db
+*.sqlite3
+
+# Ignorar archivos de entorno
+.env

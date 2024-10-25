@@ -10,11 +10,11 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 import os
 import sys
 
-path = os.path.expanduser('-/PROYECTO-FINAL-GRUPO6')
+path = os.path.expanduser('-/PROYECTO-FINAL')
 if path not in sys.path:
     sys.path.append(path)
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'PROYECTO-FINAL-GRUPO6.base'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'PROYECTO-FINAL.base'
 
 from django.core.wsgi import get_wsgi_application
 from django.contrib.staticfiles.handlers import StaticFilesHandler

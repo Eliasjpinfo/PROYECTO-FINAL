@@ -17,19 +17,17 @@ Including another URLconf
 Import the include() function: from django.urls import include, path
 Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
+from django.contrib import admin # type: ignore
+from django.urls import path, include # type: ignore
+from django.conf import settings # type: ignore
 from blog.views import IndexView, not_found_view, internal_error_view, forbidden_view
-from django.conf.urls.static import static
-from ckeditor.fields import RichTextField
+from django.conf.urls.static import static # type: ignore
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='home'),
     path('', include('apps.user.urls')),
     path('', include('apps.post.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 
@@ -42,6 +40,6 @@ handler403 = forbidden_view
 # o incluso aqui en blog\blog\urls.py
 
 if settings.DEBUG:
-    from django.conf.urls.static import static
+    from django.conf.urls.static import static # type: ignore
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

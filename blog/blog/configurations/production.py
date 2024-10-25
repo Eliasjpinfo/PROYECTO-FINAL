@@ -19,4 +19,4 @@ DATABASES = {
 # Puerto para entorno de producción
 os.environ['DJANGO_PORT'] = '8080'
 
-print('CONFIGURACIONES DB', DATABASES)
+

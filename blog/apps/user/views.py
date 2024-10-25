@@ -42,4 +42,8 @@ class LogoutView(LogoutViewDjango):
             return next_url
         return reverse_lazy('home')
     
+class AboutView(TemplateView):
+    template_name = 'about.html'
 
+class ContactView(TemplateView):
+    template_name = 'contact.html'

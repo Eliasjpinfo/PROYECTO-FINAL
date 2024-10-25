@@ -73,6 +73,8 @@ class PostFilterForm(forms.Form):
             ('-creation_date', 'Más reciente'),
             ('creation_date', 'Más antiguo'),
             ('-comments_count', 'Más comentado'),
+            ('title', 'Ascendente'),
+            ('-title', 'Descendente'),
         ),
         widget=forms.Select(attrs={'class': 'w-full p-2'})
     )
