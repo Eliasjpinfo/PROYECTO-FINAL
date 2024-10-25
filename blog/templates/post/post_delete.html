@@ -6,7 +6,7 @@
 <div class="container mx-auto p-6 bg-gray-50 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold mb-4">¿Estás seguro de que deseas eliminar este post?</h2>
 
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user == object.author %}
         <form method="post" class="mb-4">
             {% csrf_token %}
             <button type="submit" class="bg-red-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-200">
@@ -15,8 +15,13 @@
         </form>
         <a href="{% url 'post:post_detail' slug=object.slug %}" class="text-blue-600 hover:underline">Cancelar</a>
     {% else %}
-        <p class="mb-4">Debes estar logueado para eliminar un post. 
-            <a href="{% url 'user:auth_login' %}" class="text-blue-600 hover:underline">Inicia sesión</a>
+        <p class="mb-4">No tienes permiso para eliminar este post. 
+            {% if not user.is_authenticated %}
+                Debes estar logueado. 
+                <a href="{% url 'user:auth_login' %}" class="text-blue-600 hover:underline">Inicia sesión</a>
+            {% else %}
+                Este post no fue creado por ti.
+            {% endif %}
         </p>
         <a href="{% url 'post:post_detail' slug=object.slug %}" class="text-blue-600 hover:underline">Cancelar</a>
     {% endif %}
