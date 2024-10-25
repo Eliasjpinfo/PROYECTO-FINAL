@@ -6,9 +6,9 @@ load_dotenv()
 DJANGO_ENV = os.getenv('DJANGO_ENV', 'development')
 
 if DJANGO_ENV == 'production':
-    from.configuraciones.production import *
+    from .configuraciones.production import *
 else:
-    from.configuraciones.local import *
+    from .configuraciones.local import *
 
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
@@ -23,3 +23,5 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+print('ACA ESTÁ LA VARIABLEEEEE', DJANGO_ENV)
