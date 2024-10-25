@@ -24,4 +24,3 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-print('ACA ESTÁ LA VARIABLEEEEE', DJANGO_ENV)

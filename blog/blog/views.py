@@ -1,8 +1,10 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render
 
+
 class IndexView(TemplateView):
     template_name = 'index.html'
+
 
 # Es importante que el argumento exception esté presente
 # para que Django lo pueda identificar como un manejador de errores
