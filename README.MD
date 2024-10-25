@@ -6,6 +6,13 @@ Comprende un blog de recetas de cocina
 
 Realizado por Jose Elias Pintos; Fernandez Santiago y Gomez, Sergio José.
 
+Link a demo: 
+
+usuarios para demo
+username = grupo6info 
+username = colab
+username = elias
+
 ## Estructura del proyecto
 
 ```
